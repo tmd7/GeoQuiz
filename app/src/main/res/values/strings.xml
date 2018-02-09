@@ -6,10 +6,11 @@
     <string name="question_mideast">The Suez Canal connects the Red Sea and Indian Ocean.</string>
     <string name="question_africa">The source of the Nile River id in Egypt</string>
     <string name="question_americas">The Amazon River is the longest river in the Americas.</string>
-    <string name="question_asia">Lake /baikal id the world\'s longest deepest freshwater lake.</string>
+    <string name="question_asia">Lake baikal id the world\'s longest deepest freshwater lake.</string>
     <string name="true_button">True</string>
     <string name="false_button">False</string>
-    <string name="next_button">Next!</string>
+    <string name="next_button">Next</string>
+    <string name="prev_button">Prev</string>
     <string name="correct_toast">Correct!</string>
     <string name="incorrect_toast">Incorrect!</string>
 </resources>

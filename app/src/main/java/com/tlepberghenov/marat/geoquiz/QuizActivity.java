@@ -3,6 +3,7 @@ package com.tlepberghenov.marat.geoquiz;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -91,6 +92,8 @@ public class QuizActivity extends AppCompatActivity {
         mNextButton.setOnClickListener(v -> {
             mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
             updateQuestion();
+            mTrueButton.setEnabled(true);
+            mFalseButton.setEnabled(true);
         });
 
         updateQuestion();
@@ -111,6 +114,9 @@ public class QuizActivity extends AppCompatActivity {
         } else {
             messageResId = R.string.incorrect_toast;
         }
+
+        mTrueButton.setEnabled(false);
+        mFalseButton.setEnabled(false);
 
         Toast.makeText(this, messageResId, Toast.LENGTH_SHORT).show();
     }

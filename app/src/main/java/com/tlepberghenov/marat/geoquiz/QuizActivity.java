@@ -3,6 +3,7 @@ package com.tlepberghenov.marat.geoquiz;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -15,8 +16,11 @@ public class QuizActivity extends AppCompatActivity {
     private Button mTrueButton;
     private Button mFalseButton;
     private Button mNextButton;
-    private Button mPrevButton;
     private TextView mQuestionTextView;
+
+    private int mCurrentIndex = 0;
+    private int mNoteIndex = 0;
+    private int mNote = 0;
 
     private Question[] mQuestionBank = new Question[] {
             new Question(R.string.question_africa, false),
@@ -26,8 +30,6 @@ public class QuizActivity extends AppCompatActivity {
             new Question(R.string.question_mideast, false),
             new Question(R.string.question_ocean, true)
     };
-
-    private int mCurrentIndex = 0;
 
     @Override
     public void onStart() {
@@ -111,6 +113,7 @@ public class QuizActivity extends AppCompatActivity {
 
         if (userPressedTrue == answerIsTrue) {
             messageResId = R.string.correct_toast;
+            mNoteIndex++;
         } else {
             messageResId = R.string.incorrect_toast;
         }
@@ -119,6 +122,16 @@ public class QuizActivity extends AppCompatActivity {
         mFalseButton.setEnabled(false);
 
         Toast.makeText(this, messageResId, Toast.LENGTH_SHORT).show();
+
+        if (mCurrentIndex == mQuestionBank.length - 1) {
+            mNote = (int) mNoteIndex * 100 / mQuestionBank.length;
+            String text = "Your correct answers are " + mNote + "%";
+            Toast noteToast = Toast.makeText(this, text,Toast.LENGTH_LONG);
+            noteToast.setGravity(Gravity.TOP, 0, 0);
+            noteToast.show();
+            mNoteIndex = 0;
+            mNote = 0;
+        }
     }
 
 

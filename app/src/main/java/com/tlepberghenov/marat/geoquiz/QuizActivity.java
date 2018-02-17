@@ -12,6 +12,9 @@ import android.widget.Toast;
 public class QuizActivity extends AppCompatActivity {
     private static final String TAG ="QuizActivite";
     private static final String KEY_INDEX ="index";
+    private static final String KEY_NOTE_I ="noteIndex";
+    private static final String KEY_NOTE ="note";
+    private static final String KEY_BUTTON_E = "setButtonEnabled";
 
     private Button mTrueButton;
     private Button mFalseButton;
@@ -20,6 +23,7 @@ public class QuizActivity extends AppCompatActivity {
 
     private int mCurrentIndex = 0;
     private int mNoteIndex = 0;
+    private boolean mButtonEnabled = false;
     private int mNote = 0;
 
     private Question[] mQuestionBank = new Question[] {
@@ -54,6 +58,9 @@ public class QuizActivity extends AppCompatActivity {
         super.onSaveInstanceState(saveInstanceState);
         Log.d(TAG, "onSaveInstanceStage");
         saveInstanceState.putInt(KEY_INDEX, mCurrentIndex);
+        saveInstanceState.putInt(KEY_NOTE_I, mNoteIndex);
+        saveInstanceState.putInt(KEY_NOTE, mNote);
+        saveInstanceState.putBoolean(KEY_BUTTON_E, mButtonEnabled);
     }
 
     @Override
@@ -94,8 +101,9 @@ public class QuizActivity extends AppCompatActivity {
         mNextButton.setOnClickListener(v -> {
             mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
             updateQuestion();
-            mTrueButton.setEnabled(true);
-            mFalseButton.setEnabled(true);
+            mButtonEnabled = true;
+            mTrueButton.setEnabled(mButtonEnabled);
+            mFalseButton.setEnabled(mButtonEnabled);
         });
 
         updateQuestion();
@@ -118,8 +126,9 @@ public class QuizActivity extends AppCompatActivity {
             messageResId = R.string.incorrect_toast;
         }
 
-        mTrueButton.setEnabled(false);
-        mFalseButton.setEnabled(false);
+        mButtonEnabled = false;
+        mTrueButton.setEnabled(mButtonEnabled);
+        mFalseButton.setEnabled(mButtonEnabled);
 
         Toast.makeText(this, messageResId, Toast.LENGTH_SHORT).show();
 

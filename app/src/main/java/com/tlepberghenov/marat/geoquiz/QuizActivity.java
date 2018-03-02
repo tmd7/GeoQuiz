@@ -1,5 +1,6 @@
 package com.tlepberghenov.marat.geoquiz;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -25,6 +26,7 @@ public class QuizActivity extends AppCompatActivity {
     private TextView mQuestionTextView;
 
     private int mCurrentIndex = 0;
+    private boolean mIsCheater;
     private int mNoteIndex = 0;
     private boolean mButtonEnabled = false;
     private int mNote = 0;
@@ -121,6 +123,19 @@ public class QuizActivity extends AppCompatActivity {
         });
 
         updateQuestion();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode != Activity.RESULT_OK) {
+            return;
+        }
+        if (requestCode == REQUEST_CODE_CHEAT) {
+            if (data == null) {
+                return;
+            }
+            mIsCheater = CheatActivity.wasAnswerShow(data);
+        }
     }
 
     private  void updateQuestion() {

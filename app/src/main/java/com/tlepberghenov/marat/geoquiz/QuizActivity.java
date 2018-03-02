@@ -16,6 +16,7 @@ public class QuizActivity extends AppCompatActivity {
     private static final String KEY_NOTE_I ="noteIndex";
     private static final String KEY_NOTE ="note";
     private static final String KEY_BUTTON_E = "setButtonEnabled";
+    private static final int REQUEST_CODE_CHEAT = 0;
 
     private Button mTrueButton;
     private Button mFalseButton;
@@ -115,7 +116,7 @@ public class QuizActivity extends AppCompatActivity {
                 //Start CheatActivity
                 boolean answerIsTrue = mQuestionBank[mCurrentIndex].isAnswerTrue();
                 Intent intent = CheatActivity.newIntent(QuizActivity.this, answerIsTrue);
-                startActivity(intent);
+                startActivityForResult(intent, REQUEST_CODE_CHEAT);
             }
         });
 

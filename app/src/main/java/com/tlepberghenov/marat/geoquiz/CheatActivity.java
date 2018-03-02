@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 public class CheatActivity extends AppCompatActivity {
     private static final String EXTRA_ANSWER_IS_TRUE = "com.tlepberghenov.marat.geoquiz.answer_is_true";
+    private static final String EXTRA_ANSWER_SHOWN = "com.tlepberghenov.marat.geoquiz.qeoquiz.answer_shown";
     private boolean mAnswerIsTrue;
 
     private TextView mAnserTextVieaw;
@@ -37,7 +38,13 @@ public class CheatActivity extends AppCompatActivity {
                 } else {
                     mAnserTextVieaw.setText(R.string.false_button);
                 }
+                setAnswerShowResult(true);
             }
         });
+    }
+
+    private void setAnswerShowResult(boolean isAnswerShow) {
+        Intent data =new Intent();
+        data.putExtra(EXTRA_ANSWER_IS_TRUE, isAnswerShow);
     }
 }
